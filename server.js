@@ -27,11 +27,11 @@ const PORT = 8080;		// PORT where express will run
 
 const isValidUrl = (string) => {
 	var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+	'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+	'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+	'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+	'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+	'(\\#[-a-z\\d_]*)?$','i'); // fragment locator
 	return !!pattern.test(string);
 }
 
@@ -41,36 +41,36 @@ const isValidUrl = (string) => {
 // ************************************************** //
 
 pool.getConnection()
-    .then(conn => {
-    	function getURL(hash) {
-    		return conn.query({
-    			rowsAsArray: true,
-    			sql: "SELECT url FROM urls WHERE hash = ?"
-    		}, [hash])
-    	}
+	.then(conn => {
+		function getURL(hash) {
+			return conn.query({
+				rowsAsArray: true,
+				sql: "SELECT url FROM urls WHERE hash = ?"
+			}, [hash])
+		}
 
-    	function checkURL(url) {
-    		return conn.query({
-    			rowsAsArray: true,
-    			sql: "SELECT hash FROM urls WHERE url = ?"
-    		}, [url])
-    	}
-    	app.get('/shorten', function(req, res, next) {
-    		let hash = req.query.hash;
-    		if (!hash) {
-    			res.sendFile(path.join(__dirname + '/shorten.html'));
-    		} else {
-    			let url;
-    			getURL(hash)
-    				.then((data) => {
+		function checkURL(url) {
+			return conn.query({
+				rowsAsArray: true,
+				sql: "SELECT hash FROM urls WHERE url = ?"
+			}, [url])
+		}
+		app.get('/shorten', function(req, res, next) {
+			let hash = req.query.hash;
+			if (!hash) {
+				res.sendFile(path.join(__dirname + '/shorten.html'));
+			} else {
+				let url;
+				getURL(hash)
+					.then((data) => {
 						if (data[0]) {
 							url = data[0][0];
 						}
 
 						if (url) res.status(301).redirect(url);
-    					else res.status(401, "Hash not found");
+						else res.status(401, "Hash not found");
 					});
-    		}
+			}
 			
 		});
 
