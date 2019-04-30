@@ -19,7 +19,7 @@ var pool = mariadb.createPool({
 var crypto = require('crypto');
 
 const IP = "localhost"; // IP where express will run
-const PORT = 8080;		// PORT where express will run
+const PORT = 8080; // PORT where express will run
 
 // ************************************************** //
 // ********************* FUNCTIONS ****************** //
@@ -27,11 +27,11 @@ const PORT = 8080;		// PORT where express will run
 
 const isValidUrl = (string) => {
 	var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-	'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-	'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-	'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-	'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-	'(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+		'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+		'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+		'(\\#[-a-z\\d_]*)?$','i'); // fragment locator
 	return !!pattern.test(string);
 }
 
