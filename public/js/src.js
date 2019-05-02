@@ -14,9 +14,9 @@
 			let url = $("#url").val();
 
 			if (!isValidUrl(url)) return alert("Invalid URL.");
-			if (!url.contains("http")) return alert("URL is missing protocol.");
+			if (!url.includes("http")) return alert("URL is missing protocol.");
 			$.post("/newurl", {url: url}, function (data) {
-				navigator.clipboard.writeText(window.location.hostname + "/" + data) // Copy to clipboard new url
+				navigator.clipboard.writeText(window.location.hostname + "/shorten?hash=" + data) // Copy to clipboard new url
 			});
 			event.preventDefault(); // Prevent refresh
 		})
