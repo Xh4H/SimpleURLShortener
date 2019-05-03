@@ -3,6 +3,8 @@
 
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/gluten-free.svg)](http://forthebadge.com)
+
 
 ## What is "SimpleURLShortener"?
 SimpleURLShortener is a lightweight and open sourced URL Shortener which aims to be easily deployed in any server running Express.
