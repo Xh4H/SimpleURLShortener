@@ -6,7 +6,7 @@ var crypto = require('crypto');
 
 // Load DB connection details
 var dbConfig = JSON.parse(fs.readFileSync('shortener_config.json'));
-var hash_length;
+var hash_length, finished = false;
 
 // Functions
 const log = (input) => console.log("[Shortener] " + input);
@@ -15,6 +15,19 @@ const ask = (what, hide) => {
 		hideEchoBack: hide != undefined ? hide : false // Hide user input (passwords)
 	})
 };
+
+function proceed() {
+	// Express settings
+	dbConfig.server_ip = ask("Type the public IP where the service will run (or leave empty for 'localhost'): ");
+	if (dbConfig.server_ip === "") dbConfig.server_ip = "localhost";
+
+	dbConfig.server_port = ask("Type the port where the service will run (or leave empty for '8080'): ");
+	if (dbConfig.server_port === "") dbConfig.server_port = 8080;
+
+	fs.writeFileSync('shortener_config.json', JSON.stringify(dbConfig, null, 4), 'utf8');
+	log("Finished, exiting...");
+	process.exit()
+}
 
 function generateStructure(conn) {
 	const DROP_QUERY = "DROP TABLE IF EXISTS \`shortener_urls\`;";
@@ -26,11 +39,15 @@ function generateStructure(conn) {
 			PRIMARY KEY (\`id\`)
 		);`;
 
-	conn.query(DROP_QUERY);
-	conn.query(CREATE_QUERY)
+	conn.query(DROP_QUERY)
 		.then(() => {
-			log("Structure created. Exiting...");
-			process.kill(1);
+			conn.query(CREATE_QUERY)
+				.then(() => {
+					log("Structure created.");
+					finished = true;
+					conn.end();
+					proceed();
+				})
 		})
 }
 
@@ -113,13 +130,6 @@ if (createStructure) {
 	dbConfig.length = hash_length;
 	fs.writeFileSync('shortener_config.json', JSON.stringify(dbConfig, null, 4), 'utf8');
 	openConnection();
+} else {
+	proceed();
 }
-
-// Express settings
-dbConfig.server_ip = ask("Type the public IP where the service will run (or leave empty for 'localhost'): ");
-if (dbConfig.server_ip === "") dbConfig.server_ip = "localhost";
-
-let dbConfig.server_port = ask("Type the port where the service will run (or leave empty for '8080'): ");
-if (dbConfig.server_port === "") dbConfig.server_port = 8080;
-
-fs.writeFileSync('shortener_config.json', JSON.stringify(dbConfig, null, 4), 'utf8');
