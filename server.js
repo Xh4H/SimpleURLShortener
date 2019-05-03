@@ -8,18 +8,19 @@ var path = require('path');
 app.use(express.static('public'));
 
 const mariadb = require('mariadb');
-var pool = mariadb.createPool({
-	host: 'host',
-	port: 'port',
-	user: 'user',
-	password: 'password',
-	database: 'database'
-});
-
+const dbConfig = JSON.parse(fs.readFileSync('shortener_config.json'));
 var crypto = require('crypto');
 
-const IP = "localhost"; // IP where express will run
-const PORT = 8080; // PORT where express will run
+var pool = mariadb.createPool({
+	host: dbConfig.host,
+	port: dbConfig.port,
+	user: dbConfig.username,
+	password: dbConfig.password,
+	database: dbConfig.database
+});
+
+const IP = dbConfig.server_ip; 		// IP where express will run
+const PORT = dbConfig.server_port; 	// PORT where express will run
 
 // ************************************************** //
 // ********************* FUNCTIONS ****************** //
@@ -45,14 +46,14 @@ pool.getConnection()
 		function getURL(hash) {
 			return conn.query({
 				rowsAsArray: true,
-				sql: "SELECT url FROM urls WHERE hash = ?"
+				sql: "SELECT url FROM shortener_urls WHERE hash = ?"
 			}, [hash])
 		}
 
 		function checkURL(url) {
 			return conn.query({
 				rowsAsArray: true,
-				sql: "SELECT hash FROM urls WHERE url = ?"
+				sql: "SELECT hash FROM shortener_urls WHERE url = ?"
 			}, [url])
 		}
 		app.get('/shorten', function(req, res, next) {
@@ -91,7 +92,7 @@ pool.getConnection()
 
 							conn.query({
 								rowsAsArray: true,
-								sql: 'INSERT INTO urls (hash, url, ip) VALUES (?, ?, ?);'
+								sql: 'INSERT INTO shortener_urls (hash, url, ip) VALUES (?, ?, ?);'
 							}, [hash, url, ip])
 								.then(() => {
 									res.status(200).send(hash);
