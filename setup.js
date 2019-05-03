@@ -6,7 +6,7 @@ var crypto = require('crypto');
 
 // Load DB connection details
 var dbConfig = JSON.parse(fs.readFileSync('shortener_config.json'));
-var hash_length, finished = false;
+var hash_length;
 
 // Functions
 const log = (input) => console.log("[Shortener] " + input);
@@ -44,7 +44,6 @@ function generateStructure(conn) {
 			conn.query(CREATE_QUERY)
 				.then(() => {
 					log("Structure created.");
-					finished = true;
 					conn.end();
 					proceed();
 				})
