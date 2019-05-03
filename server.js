@@ -1,9 +1,8 @@
-// Cargar modulos y crear nueva aplicacion
 var express = require("express"); 
 var app = express();
 var bodyParser = require('body-parser');
-app.use(bodyParser.json()); // soporte para bodies codificados en jsonsupport
-app.use(bodyParser.urlencoded({ extended: true })); // soporte para bodies codificados
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 var path = require('path');
 app.use(express.static('public'));
 
@@ -19,8 +18,8 @@ var pool = mariadb.createPool({
 	database: dbConfig.database
 });
 
-const IP = dbConfig.server_ip; 		// IP where express will run
-const PORT = dbConfig.server_port; 	// PORT where express will run
+const IP = dbConfig.server_ip; // IP where express will run
+const PORT = dbConfig.server_port; // PORT where express will run
 
 // ************************************************** //
 // ********************* FUNCTIONS ****************** //
@@ -110,6 +109,6 @@ pool.getConnection()
 		});
 
 		setInterval(function() {
-			conn.query("SELECT 1"); // pool keep-alive
+			conn.query("SELECT 1"); // conn keep-alive
 		}, 60000)
 	});
