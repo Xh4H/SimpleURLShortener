@@ -25,6 +25,8 @@ function proceed() {
 	if (dbConfig.server_port === "") dbConfig.server_port = 8080;
 
 	fs.writeFileSync('shortener_config.json', JSON.stringify(dbConfig, null, 4), 'utf8');
+	log("You are ready to run SimpleURLShortener. (`node server`)".green);
+	log("If you encounter any bug, please report it here: https://github.com/Xh4H/SimpleURLShortener".green);
 	log("Finished, exiting...");
 	process.exit()
 }
