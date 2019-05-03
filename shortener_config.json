@@ -4,5 +4,7 @@
     "username": "username",
     "password": "password",
     "database": "database",
-    "length": 10
+    "length": 10,
+    "server_ip": "",
+    "server_port": ""
 }
