@@ -1,11 +1,11 @@
 <h1 align="center">SimpleURLShortener</h1>
 <h3 align="center">A simple and open source solution to deploy a URL shortener anywhere</h3>
 
-[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
-[![forthebadge](http://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/gluten-free.svg)](http://forthebadge.com)
-
 <p align="center">
+  <img src="http://forthebadge.com/images/badges/built-with-love.svg"/>
+  <img src="http://forthebadge.com/images/badges/uses-js.svg"/>
+  <img src="https://forthebadge.com/images/badges/gluten-free.svg"/>
+
   <img src="https://xh4h.com/img/upload/20190506153239.gif"/>
 </p>
 
