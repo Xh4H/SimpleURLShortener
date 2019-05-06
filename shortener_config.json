@@ -5,6 +5,5 @@
     "password": "password",
     "database": "database",
     "length": 10,
-    "server_ip": "",
     "server_port": ""
 }
