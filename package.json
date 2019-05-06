@@ -1,0 +1,39 @@
+{
+  "name": "simpleurlshortener",
+  "version": "1.0.0",
+  "description": "A lightweight and open sourced URL Shortener which aims to be easily deployed in any server running Express",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mariadb": "^2.0.3",
+    "readline-sync": "^1.4.9",
+    "colors": "^1.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "setup": "node setup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xh4H/SimpleURLShortener.git"
+  },
+  "keywords": [
+    "open-source",
+    "shortener",
+    "url-shortener",
+    "simple",
+    "deployment",
+    "nodejs",
+    "javascript",
+    "express",
+    "html"
+  ],
+  "author": "Xh4H",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xh4H/SimpleURLShortener/issues"
+  },
+  "homepage": "https://github.com/Xh4H/SimpleURLShortener#readme"
+}
