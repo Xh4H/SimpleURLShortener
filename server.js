@@ -6,6 +6,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var path = require('path');
 app.use(express.static('public'));
 
+const fs = require("fs");
 const mariadb = require('mariadb');
 const dbConfig = JSON.parse(fs.readFileSync('shortener_config.json'));
 var crypto = require('crypto');
