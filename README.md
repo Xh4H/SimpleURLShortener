@@ -9,6 +9,9 @@
   <img src="https://xh4h.com/img/upload/20190506153239.gif"/>
 </p>
 
+## Live working version
+I used this privately for a long time, now it is open to the public: https://xh4h.com/shorten
+
 ## What is "SimpleURLShortener"?
 SimpleURLShortener is a lightweight and open sourced URL Shortener which aims to be easily deployed in any server running Express.
 
