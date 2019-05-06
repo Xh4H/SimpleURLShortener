@@ -21,3 +21,5 @@ I was sick of full-of-ads shorteners and volatile shortened URLs, and since many
 1. Download [latest release](https://github.com/Xh4H/SimpleURLShortener/releases).
 1. run `npm install && npm run-script setup` to prepare the environment
 1. run `node start` to start the service.
+
+Service will be running in `ip/shorten`.
