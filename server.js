@@ -19,7 +19,6 @@ var pool = mariadb.createPool({
 	database: dbConfig.database
 });
 
-const IP = dbConfig.server_ip; // IP where express will run
 const PORT = dbConfig.server_port; // PORT where express will run
 
 // ************************************************** //
@@ -105,7 +104,7 @@ pool.getConnection()
 			}
 		});
 
-		var server = app.listen(8080, function () {
+		var server = app.listen(PORT, function () {
 			console.log('Server is running..'); 
 		});
 
