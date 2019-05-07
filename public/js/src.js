@@ -13,14 +13,10 @@
 		$("#shorten").click(function(event) {
 			let url = $("#url").val();
 
-			if (!isValidUrl(url))
-				return alert("Invalid URL.");
-			if (!url.includes("http"))
-				return alert("URL is missing protocol.");
-			$.post("/newurl", {
-				url: url
-			}, function (data) {
-				navigator.clipboard.writeText(window.location.hostname + "/shorten?hash=" + data); // Copy to clipboard new url
+			if (!isValidUrl(url)) return alert("Invalid URL.");
+			if (!url.includes("http")) return alert("URL is missing protocol.");
+			$.post("/newurl", {url: url}, function (data) {
+				navigator.clipboard.writeText(window.location.hostname + "/shorten/" + data); // Copy to clipboard new url
 				$("#success").css("display", "block");
 			});
 			event.preventDefault(); // Prevent refresh
