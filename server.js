@@ -56,24 +56,24 @@ pool.getConnection()
 				sql: "SELECT hash FROM shortener_urls WHERE url = ?"
 			}, [url])
 		}
-		app.get('/shorten', function(req, res, next) {
-			let hash = req.query.hash;
-			if (!hash) {
-				res.sendFile(path.join(__dirname + '/shorten.html'));
-			} else {
-				let url;
-				getURL(hash)
-					.then((data) => {
-						if (data[0]) {
-							url = data[0][0];
-						}
 
-						if (url) res.status(301).redirect(url);
-						else res.status(401, "Hash not found");
-					});
-			}
-			
+		app.get('/shorten', function(req, res, next) {
+			res.sendFile(path.join(__dirname + '/shorten.html'));	
 		});
+
+		app.get("/shorten/:hash", function(req, res) {
+			let hash = req.params.hash;
+			let url;
+			getURL(hash)
+				.then((data) => {
+					if (data[0]) {
+						url = data[0][0];
+					}
+
+					if (url) res.status(301).redirect(url);
+					else res.status(401, "Hash not found");
+				});
+		})
 
 		app.post('/newurl', function(req, res, next) {
 			let url = req.body["url"];
@@ -105,7 +105,7 @@ pool.getConnection()
 			}
 		});
 
-		var server = app.listen(PORT, IP, function () {
+		var server = app.listen(8080, function () {
 			console.log('Server is running..'); 
 		});
 
