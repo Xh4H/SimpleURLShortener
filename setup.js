@@ -125,7 +125,7 @@ createStructure = !createStructure.includes("n"); // Whether we should create th
 if (createStructure) {
 	hash_length = parseInt(askLength());
 	let hash = crypto.createHash('sha256').update("someurlgoeshere" + (+ new Date())).digest("hex").substring(0, hash_length);
-	log("Example of a shortened url: https://www.mydomain.com/shorten?hash=" + hash);
+	log("Example of a shortened url: https://www.mydomain.com/shorten/" + hash);
 
 	// Update settings
 	dbConfig.length = hash_length;
