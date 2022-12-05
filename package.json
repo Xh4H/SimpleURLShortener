@@ -4,7 +4,7 @@
   "description": "A lightweight and open sourced URL Shortener which aims to be easily deployed in any server running Express",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "mariadb": "^2.0.3",
     "readline-sync": "^1.4.9",
     "colors": "^1.3.3"
